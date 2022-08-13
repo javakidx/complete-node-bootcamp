@@ -1,4 +1,6 @@
-//const fs = require("fs");
+const http = require('http');
+const fs = require('fs');
+const slugify = require('slugify');
 
 // const textIn = fs.readFileSync("./txt/input.txt", "utf8");
 // console.log(textIn);
@@ -20,32 +22,32 @@
 // });
 
 // console.log("Will read and then write file");
-
-const http = require("http");
-const fs = require("fs");
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
+const dataObject = JSON.parse(data);
+const slugs = dataObject.map((el) => slugify(el.productName, { lower: true }));
 
 const server = http.createServer((req, res) => {
   const pathName = req.url;
-  if (pathName === "/" || pathName === "/overview") {
-    res.end("This is the OVERVIEW");
-  } else if (pathName === "/product") {
-    res.end("This is the PRODUCT");
-  } else if (pathName === "/api") {
-    fs.readFile(`${__dirname}/dev-data/data.json`, "utf8", (err, data) => {
+  if (pathName === '/' || pathName === '/overview') {
+    res.end('This is the OVERVIEW**');
+  } else if (pathName === '/product') {
+    res.end('This is the PRODUCT');
+  } else if (pathName === '/api') {
+    fs.readFile(`${__dirname}/dev-data/data.json`, 'utf8', (err, data) => {
       console.log(data);
       res.writeHead(200, {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       });
       res.end(data);
     });
   } else {
     res.writeHead(404, {
-      "content-type": "text/html",
+      'content-type': 'text/html',
     });
-    res.end("<h1>Page not found</h1>");
+    res.end('<h1>Page not found</h1>');
   }
 });
 
-server.listen(8000, "127.0.0.1", () => {
-  console.log("Listening on port 8000");
+server.listen(8000, '127.0.0.1', () => {
+  console.log('Listening on port 8000');
 });
