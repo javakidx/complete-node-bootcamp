@@ -1,5 +1,13 @@
 {
+<<<<<<< HEAD
+<<<<<<< HEAD
   "tabWidth": 4,
+=======
+  "tabWidth": 2,
+>>>>>>> 0dad4c1... Completed setction 5
+=======
+  "tabWidth": 4,
+>>>>>>> f02e945... abc
   "useTabs": false,
   "singleQuote": true
 }
