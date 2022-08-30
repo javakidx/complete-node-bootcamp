@@ -5,6 +5,9 @@ const tourController = require('../controllers/tourController');
 const tourValidator = require('../validators/tourValidator');
 
 //router.param('id', tourController.checkID);
+router
+  .route('/top-5-tours')
+  .get(tourController.prepareTop5Tours, tourController.getAllTours);
 
 router
   .route('/')
